@@ -414,6 +414,12 @@ a {
   padding-top: 6px;
 }
 
+.bazin-formula-large {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
 .formula-legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -702,6 +708,10 @@ a {
   gap: 14px;
 }
 
+.bazin-manual-form {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+}
+
 .manual-form label > span,
 .manual-form label > small {
   display: block;
@@ -749,6 +759,16 @@ a {
   font: inherit;
 }
 
+.manual-input-suffix input {
+  padding-left: 13px;
+  padding-right: 7px;
+}
+
+.manual-input-suffix > span {
+  padding-right: 13px;
+  padding-left: 0;
+}
+
 .manual-submit {
   min-height: 48px;
   border: 0;
@@ -770,6 +790,41 @@ a {
 
 .calculation-entry {
   margin-top: 26px;
+}
+
+.valuation-method-switch {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.valuation-method-switch a,
+.valuation-method-switch span {
+  position: relative;
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.valuation-method-switch a:hover {
+  color: var(--green-dark);
+}
+
+.valuation-method-switch span {
+  color: var(--green-dark);
+}
+
+.valuation-method-switch span::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  content: "";
 }
 
 .calculation-mode-switch {
@@ -1330,6 +1385,17 @@ a {
 
   .manual-form {
     grid-template-columns: 1fr;
+  }
+
+  .valuation-method-switch {
+    width: 100%;
+  }
+
+  .valuation-method-switch a,
+  .valuation-method-switch span {
+    flex: 1;
+    padding-inline: 8px;
+    text-align: center;
   }
 
   .manual-submit {

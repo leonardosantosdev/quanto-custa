@@ -2,7 +2,7 @@
 
 **Precifique o mercado financeiro.**
 
-Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM para calcular e explicar o Número de Graham. A interface original foi preservada; cotação, fundamento e demonstração continuam claramente identificados.
+Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM e proventos oficiais da B3 para calcular e explicar o Número de Graham e o preço-teto de Bazin.
 
 ## Arquitetura
 
@@ -16,12 +16,14 @@ Vercel Cron ou CLI
   -> seleção da reapresentação mais recente
   -> cálculo e validação de LPA/VPA
   -> transação Postgres (histórico + atual + estado + execução)
+  -> atualização incremental dos dividendos e JCP por classe de ação na B3
 
 Site
   -> catálogo da B3 e cotação da brapi.dev
   -> fundamentos atuais do Postgres
   -> cálculo automático com fundamentos CVM seguros
   -> fallback manual de LPA/VPA, sem persistência
+  -> preço-teto de Bazin automático ou manual, com JCP líquido de IR
 ```
 
 O projeto usa SQL direto com o cliente leve `postgres`, adequado a conexões serverless e sem acoplamento a APIs proprietárias. O provedor recomendado é Neon Postgres pela conexão padrão via `DATABASE_URL`; Supabase ou qualquer Postgres compatível também funciona.
@@ -30,6 +32,7 @@ O projeto usa SQL direto com o cliente leve `postgres`, adequado a conexões ser
 
 - Fundamentos: conjuntos públicos oficiais [ITR](https://dados.cvm.gov.br/dataset/cia_aberta-doc-itr) e [DFP](https://dados.cvm.gov.br/dataset/cia_aberta-doc-dfp) da CVM.
 - Cotação: brapi.dev, consultada exclusivamente no servidor.
+- Dividendos e JCP: histórico de eventos corporativos da B3, associado à classe da ação pelo ISIN.
 - Cadastro ticker/CNPJ/código CVM: [FCA](https://dados.cvm.gov.br/dataset/cia_aberta-doc-fca) e [cadastro diário de companhias abertas](https://dados.cvm.gov.br/dataset/cia_aberta-cad) da CVM, cruzados com os instrumentos e o [cadastro de companhias listadas](https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/) da B3.
 - Catálogo complementar de busca: brapi.dev, usado somente como fallback para ativos ainda não sincronizados.
 - Demonstração: `data/demo/stocks.ts`, apenas quando explicitamente habilitada.
@@ -44,6 +47,8 @@ A entrada do cálculo oferece duas opções independentes:
 - **Preencher LPA e VPA:** uma calculadora separada usa somente os valores digitados para obter o Número de Graham. Ela não possui ticker, cotação ou comparação com o mercado.
 
 Valores manuais nunca são enviados para a API, gravados no Postgres ou misturados ao histórico oficial. Uma ação sem fundamentos seguros pode direcionar o usuário à calculadora manual, mas os dois fluxos permanecem separados.
+
+O método Bazin possui os mesmos dois fluxos independentes. No automático, a aplicação soma os dividendos integrais e o JCP líquido de 15% de IR cuja data-com está nos últimos 12 meses, ajustando eventos anteriores por desdobramentos, bonificações e grupamentos posteriores. O retorno mínimo padrão é 6%, mas pode ser alterado na calculadora manual. A cotação manual é opcional e serve apenas para comparação.
 
 ## Requisitos e configuração
 
@@ -91,6 +96,8 @@ Modelo principal:
 - `fundamentals_history`: versões processadas, com unicidade lógica por ticker, período, tipo, versão e método;
 - `ingestion_state`: ETag, Last-Modified, tamanho, hash SHA-256, snapshot filtrado e último estado de cada ZIP;
 - `ingestion_runs`: início, fim, status, contadores, warnings e erros de cada execução.
+- `cash_proceeds`: dividendos e JCP normalizados por ticker, classe e evento;
+- `dividend_sync_state`: última consulta e estado incremental de cada emissor na B3.
 
 As migrations ficam em `db/migrations` e são aplicadas em ordem, uma única vez.
 
@@ -119,7 +126,10 @@ Depois de executar `db:setup`:
 
 ```bash
 npm run update:fundamentals
+npm run update:dividends:full
 ```
+
+`update:dividends:full` faz a carga inicial de todos os emissores. No uso cotidiano, `npm run update:market-data` atualiza os fundamentos e um lote rotativo de proventos; `npm run update:dividends` executa somente esse lote.
 
 A pipeline primeiro sincroniza as companhias e depois consulta quatro fontes: ITR e DFP do ano atual e do anterior. Não existe uma requisição por ticker. Um `HEAD` condicional compara ETag, Last-Modified e tamanho; o ZIP só é baixado quando necessário. Após o download, o hash evita reprocessamento quando apenas os metadados HTTP mudaram.
 
@@ -129,7 +139,7 @@ Se nada mudou após uma execução íntegra, a rotina encerra sem recalcular. Um
 
 ## Cron diário
 
-`vercel.json` agenda `GET /api/cron/update-fundamentals` todos os dias às `11:00 UTC`, aproximadamente `08:00` em Brasília. Assim, uma nova entrega ITR/DFP pode entrar no próximo ciclo diário; o arquivo B3 maior continua com cache semanal. Configure `CRON_SECRET` no ambiente da Vercel. Conforme o mecanismo do Vercel Cron, ele é enviado como:
+`vercel.json` agenda `GET /api/cron/update-fundamentals` todos os dias às `11:00 UTC`, aproximadamente `08:00` em Brasília. A mesma execução atualiza os fundamentos CVM e 48 emissores de proventos por vez, em rotação pelo menos atualizado. A carga completa inicial continua sendo feita pelo CLI. Configure `CRON_SECRET` no ambiente da Vercel. Conforme o mecanismo do Vercel Cron, ele é enviado como:
 
 ```http
 Authorization: Bearer <CRON_SECRET>
@@ -232,4 +242,4 @@ Os ZIPs anuais podem crescer, e o tempo total varia com a CVM e o provedor. A ro
 
 ## Aviso
 
-O Número de Graham é uma métrica isolada. O conteúdo é educacional e não representa recomendação de compra ou venda.
+O Número de Graham e o preço-teto de Bazin são métricas isoladas. O conteúdo é educacional e não representa recomendação de compra ou venda.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ManualGrahamCalculator } from "@/components/manual-graham-calculator";
+import { ValuationMethodSwitch } from "@/components/valuation-method-switch";
 
 export const metadata: Metadata = {
   title: "Calculadora manual do Número de Graham",
@@ -27,6 +28,8 @@ export default function ManualCalculatorPage() {
             valores e recebe apenas o resultado da fórmula de Graham.
           </p>
         </header>
+
+        <ValuationMethodSwitch active="graham" />
 
         <div className="calculation-mode-switch" aria-label="Forma de cálculo">
           <Link href="/#calcular">Pesquisar uma ação</Link>

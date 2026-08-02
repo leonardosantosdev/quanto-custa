@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { StockSearch } from "@/components/stock-search";
+import { ValuationMethodSwitch } from "@/components/valuation-method-switch";
 import { SITE_CONFIG } from "@/lib/config";
 
 export const metadata: Metadata = {
   description:
-    "Consulte o Número de Graham de ações da B3 e entenda, com clareza, os dados usados no cálculo.",
+    "Calcule o Número de Graham e o preço-teto de Bazin de ações da B3 com dados transparentes.",
 };
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <section className="hero-section">
         <div className="page-shell hero-grid">
           <div className="hero-copy">
+            <ValuationMethodSwitch active="graham" />
             <p className="eyebrow">Calculadora de Graham</p>
             <h1>Consulte o Número de Graham de uma ação</h1>
             <p className="hero-subtitle">

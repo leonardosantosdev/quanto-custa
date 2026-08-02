@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Disclaimer } from "@/components/disclaimer";
 
 export const metadata: Metadata = {
-  title: "Metodologia do Número de Graham",
+  title: "Metodologias de Graham e Bazin",
   description:
-    "Entenda a fórmula do Número de Graham, os dados usados, a comparação percentual e as limitações da métrica.",
+    "Entenda as fórmulas de Graham e Bazin, os dados usados e as limitações de cada referência.",
 };
 
 export default function MethodologyPage() {
@@ -21,7 +21,7 @@ export default function MethodologyPage() {
 
         <header className="methodology-header">
           <p className="eyebrow">Metodologia</p>
-          <h1 className="page-title">Uma fórmula simples, explicada por inteiro</h1>
+          <h1 className="page-title">Duas referências, explicadas por inteiro</h1>
           <p className="methodology-lead">
             A ferramenta organiza os dados que entram no cálculo e mostra a
             comparação de forma objetiva. Aqui está tudo o que você precisa
@@ -33,6 +33,7 @@ export default function MethodologyPage() {
           <nav className="methodology-index" aria-label="Nesta página">
             <a href="#formula">A fórmula</a>
             <a href="#indicadores">LPA e VPA</a>
+            <a href="#bazin">Método Bazin</a>
             <a href="#comparacao">Comparação</a>
             <a href="#sem-resultado">Sem resultado</a>
             <a href="#dados">Origem dos dados</a>
@@ -90,6 +91,27 @@ export default function MethodologyPage() {
               </p>
             </section>
 
+            <section id="bazin">
+              <h2>Preço-teto pelo método Bazin</h2>
+              <p>
+                O preço-teto de Bazin divide os proventos por ação dos últimos
+                12 meses pelo retorno mínimo desejado. A referência tradicional
+                é 6% ao ano.
+              </p>
+              <div className="method-formula">Proventos por ação ÷ 0,06</div>
+              <p>
+                Nos dados automáticos, somamos dividendos integrais e JCP líquido
+                de 15% de imposto cuja data-com ocorreu nos últimos 12 meses. Os
+                eventos são associados à classe correta da ação pelo ISIN e
+                ajustados quando há desdobramento, bonificação ou grupamento.
+              </p>
+              <p>
+                A fórmula isolada não avalia se os pagamentos são recorrentes ou
+                sustentáveis. Proventos extraordinários, dívida, qualidade do
+                negócio e histórico de distribuição precisam ser analisados à parte.
+              </p>
+            </section>
+
             <section id="sem-resultado">
               <h2>Por que alguns ativos não produzem resultado</h2>
               <p>
@@ -118,6 +140,11 @@ export default function MethodologyPage() {
                 armazenados separadamente no banco. Por isso a página mostra o
                 horário da cotação, a data de referência contábil e a atualização
                 do fundamento como datas distintas.
+              </p>
+              <p>
+                Os proventos usados no cálculo de Bazin vêm do cadastro oficial
+                de eventos corporativos da B3 e são armazenados no banco. A
+                sincronização diária atualiza o catálogo em lotes ao longo da semana.
               </p>
               <p>
                 A busca também usa o catálogo da brapi.dev para oferecer ações

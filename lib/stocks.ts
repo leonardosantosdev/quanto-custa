@@ -16,7 +16,11 @@ import {
   looksLikeUnsupportedListedAsset,
   normalizeTicker,
 } from "@/lib/ticker";
-import type { SearchResponse, StockLookupResult } from "@/lib/types";
+import type {
+  CalculationMethod,
+  SearchResponse,
+  StockLookupResult,
+} from "@/lib/types";
 
 function assetClassLabel(shareClass: "ON" | "PN"): string {
   return shareClass === "ON" ? "Ação ordinária" : "Ação preferencial";
@@ -41,7 +45,10 @@ function demoSearch(query: string): SearchResponse {
   };
 }
 
-export async function searchStocks(query: string): Promise<SearchResponse> {
+export async function searchStocks(
+  query: string,
+  method: CalculationMethod = "graham",
+): Promise<SearchResponse> {
   const normalizedQuery = query.trim().slice(0, 60);
   if (normalizedQuery.length < 2) {
     return { results: [], demo: !hasDatabaseConfiguration() && isDemoDataEnabled() };
@@ -57,7 +64,9 @@ export async function searchStocks(query: string): Promise<SearchResponse> {
       name: company.company_name,
       assetClass: assetClassLabel(company.share_class),
       supported: true,
-      calculationMode: company.fundamentals_available
+      calculationMode: (method === "bazin"
+        ? company.dividends_available
+        : company.fundamentals_available)
         ? ("automatic" as const)
         : ("manual" as const),
     }));

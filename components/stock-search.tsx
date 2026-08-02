@@ -11,14 +11,22 @@ import {
   type KeyboardEvent,
 } from "react";
 
-import type { SearchResponse, StockSearchResult } from "@/lib/types";
+import type {
+  CalculationMethod,
+  SearchResponse,
+  StockSearchResult,
+} from "@/lib/types";
 
 interface StockSearchProps {
   autoFocus?: boolean;
   compact?: boolean;
+  method?: CalculationMethod;
 }
 
-export function StockSearch({ autoFocus = false }: StockSearchProps) {
+export function StockSearch({
+  autoFocus = false,
+  method = "graham",
+}: StockSearchProps) {
   const router = useRouter();
   const listboxId = useId();
   const wrapperRef = useRef<HTMLFormElement>(null);
@@ -53,7 +61,7 @@ export function StockSearch({ autoFocus = false }: StockSearchProps) {
 
       try {
         const response = await fetch(
-          `/api/search?q=${encodeURIComponent(trimmedQuery)}`,
+          `/api/search?q=${encodeURIComponent(trimmedQuery)}&method=${method}`,
           { signal: controller.signal },
         );
 
@@ -80,7 +88,7 @@ export function StockSearch({ autoFocus = false }: StockSearchProps) {
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [query]);
+  }, [method, query]);
 
   useEffect(() => {
     function closeOnOutsideClick(event: MouseEvent) {
@@ -94,7 +102,7 @@ export function StockSearch({ autoFocus = false }: StockSearchProps) {
   function selectStock(stock: StockSearchResult) {
     if (!stock.supported) return;
     setIsOpen(false);
-    router.push(`/acao/${stock.ticker}`);
+    router.push(method === "bazin" ? `/bazin/${stock.ticker}` : `/acao/${stock.ticker}`);
   }
 
   function handleQueryChange(value: string) {

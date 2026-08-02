@@ -1,10 +1,5 @@
 import { timingSafeEqual } from "node:crypto";
 
-import {
-  runFundamentalsIngestion,
-  type IngestionSummary,
-} from "@/lib/cvm/pipeline";
-
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -19,9 +14,14 @@ export function isAuthorizedCronRequest(
   return expected.length === received.length && timingSafeEqual(expected, received);
 }
 
-type PipelineRunner = () => Promise<IngestionSummary>;
+type PipelineRunner = () => Promise<{ status: string }>;
 
-export function createCronHandler(run: PipelineRunner = runFundamentalsIngestion) {
+async function runDefaultPipeline() {
+  const { runMarketDataUpdate } = await import("@/lib/market-data");
+  return runMarketDataUpdate();
+}
+
+export function createCronHandler(run: PipelineRunner = runDefaultPipeline) {
   return async function cronHandler(request: Request): Promise<Response> {
     if (!isAuthorizedCronRequest(request.headers.get("authorization"))) {
       return Response.json({ ok: false, message: "Não autorizado." }, { status: 401 });
@@ -38,7 +38,7 @@ export function createCronHandler(run: PipelineRunner = runFundamentalsIngestion
       return Response.json({ ok: true, summary });
     } catch {
       return Response.json(
-        { ok: false, message: "A atualização de fundamentos falhou." },
+        { ok: false, message: "A atualização dos dados de mercado falhou." },
         { status: 503 },
       );
     }

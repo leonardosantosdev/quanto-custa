@@ -11,7 +11,8 @@ export function Header() {
           {SITE_CONFIG.name}
         </Link>
         <nav className="main-nav" aria-label="Navegação principal">
-          <Link href="/">Início</Link>
+          <Link href="/">Graham</Link>
+          <Link href="/bazin">Bazin</Link>
           <Link href="/metodologia">Metodologia</Link>
           <Link className="nav-action" href="/#calcular">
             Calcular

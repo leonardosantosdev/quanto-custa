@@ -101,6 +101,7 @@ export async function findActiveCompanies(query: string) {
       company_name: string;
       share_class: ShareClass;
       fundamentals_available: boolean;
+      dividends_available: boolean;
     }[]
   >`
     SELECT
@@ -108,7 +109,14 @@ export async function findActiveCompanies(query: string) {
       c.company_name,
       c.share_class,
       EXISTS (SELECT 1 FROM fundamentals f WHERE f.ticker = c.ticker)
-        AS fundamentals_available
+        AS fundamentals_available,
+      EXISTS (
+        SELECT 1 FROM cash_proceeds p
+        WHERE p.ticker = c.ticker
+          AND p.is_active = TRUE
+          AND p.ex_date > CURRENT_DATE - INTERVAL '1 year'
+          AND p.ex_date <= CURRENT_DATE
+      ) AS dividends_available
     FROM companies c
     WHERE c.is_active = TRUE
       AND (c.ticker ILIKE ${pattern} OR c.company_name ILIKE ${pattern})

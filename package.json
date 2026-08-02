@@ -15,7 +15,10 @@
     "db:migrate": "tsx scripts/db-migrate.ts",
     "db:seed": "tsx scripts/db-seed.ts",
     "sync:companies": "tsx scripts/sync-companies.ts",
-    "update:fundamentals": "tsx scripts/update-fundamentals.ts"
+    "update:fundamentals": "tsx scripts/update-fundamentals.ts",
+    "update:market-data": "tsx scripts/update-market-data.ts",
+    "update:dividends": "tsx scripts/update-dividends.ts",
+    "update:dividends:full": "tsx scripts/update-dividends.ts --full"
   },
   "dependencies": {
     "@next/env": "^16.2.12",
