@@ -6,8 +6,7 @@ import { FormulaBreakdown } from "@/components/formula-breakdown";
 import { GrahamResultPanel } from "@/components/graham-result";
 import { MetricCard } from "@/components/metric-card";
 import { StockSearch } from "@/components/stock-search";
-import { getStock, normalizeTicker } from "@/lib/brapi";
-import { DEMO_STOCKS } from "@/lib/demo-data";
+import { DEMO_STOCKS } from "@/data/demo/stocks";
 import {
   currencyFormatter,
   formatComparisonSentence,
@@ -15,6 +14,7 @@ import {
   formatReferenceDate,
 } from "@/lib/formatters";
 import { calculateGrahamNumber, calculatePriceDifference } from "@/lib/graham";
+import { getStock, normalizeTicker } from "@/lib/stocks";
 
 export function generateStaticParams() {
   return DEMO_STOCKS.map((stock) => ({ ticker: stock.ticker }));
@@ -61,6 +61,26 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
   const ticker = normalizeTicker(rawTicker) ?? rawTicker.toUpperCase();
   const lookup = await getStock(rawTicker);
 
+  if (lookup.status === "manual") {
+    return (
+      <main className="inner-page">
+        <div className="page-shell">
+          <div className="error-card">
+            <span className="error-code">{ticker}</span>
+            <h1>Fundamentos automáticos indisponíveis</h1>
+            <p>
+              {lookup.message} Se você já possui LPA e VPA de uma fonte em que
+              confia, pode usar a calculadora manual independente.
+            </p>
+            <Link className="primary-link" href="/calculadora">
+              Preencher LPA e VPA
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   if (lookup.status !== "success") {
     const title =
       lookup.status === "unsupported"
@@ -103,8 +123,12 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
             </div>
           </div>
           <p className="updated-at">
-            Última atualização<br />
+            Cotação atualizada<br />
             <strong>{formatDateTime(stock.updatedAt)}</strong>
+            <br />
+            Fundamentos: <strong>{formatReferenceDate(stock.referenceDate)}</strong>
+            <br />
+            Base atualizada: <strong>{formatDateTime(stock.fundamentalsUpdatedAt)}</strong>
           </p>
         </header>
 
@@ -115,6 +139,13 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
               : "Dados de demonstração."}
           </p>
         ) : null}
+
+        <p className="manual-option">
+          Prefere informar os valores diretamente?{" "}
+          <Link href="/calculadora">
+            Abrir a calculadora manual
+          </Link>
+        </p>
 
         <GrahamResultPanel price={stock.price} result={graham} />
 
@@ -131,7 +162,7 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
                 <MetricCard
                   label="LPA"
                   value={stock.eps === null ? "Indisponível" : currencyFormatter.format(stock.eps)}
-                  detail="Lucro por ação"
+                  detail={`Lucro por ação · ref. ${formatReferenceDate(stock.referenceDate)}`}
                 />
                 <MetricCard
                   label="VPA"
@@ -140,14 +171,19 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
                       ? "Indisponível"
                       : currencyFormatter.format(stock.bookValuePerShare)
                   }
-                  detail="Valor patrimonial por ação"
+                  detail={`Valor patrimonial por ação · ref. ${formatReferenceDate(stock.referenceDate)}`}
                 />
                 <MetricCard
                   label="Cotação"
                   value={currencyFormatter.format(stock.price)}
-                  detail={`Referência contábil: ${formatReferenceDate(stock.referenceDate)}`}
+                  detail={`Cotação atualizada em ${formatDateTime(stock.updatedAt)}`}
                 />
               </dl>
+              <p className="asset-class">
+                {stock.source === "cvm" && stock.documentType
+                  ? `Fonte: CVM · ${stock.documentType} versão ${stock.documentVersion} · recebido em ${formatReferenceDate(stock.documentReceivedAt)}`
+                  : "Fonte: conjunto local de demonstração."}
+              </p>
             </section>
 
             <section className="content-card" aria-labelledby="memoria">

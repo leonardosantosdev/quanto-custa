@@ -18,11 +18,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.name} — Número de Graham para ações da B3`,
+    default: `${SITE_CONFIG.name} — Precifique o mercado financeiro`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description:
-    "Calcule e entenda o Número de Graham de ações brasileiras com dados, fórmula e limitações apresentados de forma clara.",
+    "Precifique o mercado financeiro com o Número de Graham e dados de ações brasileiras.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -35,7 +35,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <footer className="site-footer">
             <div className="page-shell footer-inner">
               <p>© {new Date().getFullYear()} {SITE_CONFIG.name}</p>
-              <p>Informação clara para decisões mais conscientes.</p>
             </div>
           </footer>
         </div>

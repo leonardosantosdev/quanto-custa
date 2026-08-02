@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Quanto Custa</title>
+  <path
+    fill="#176b4d"
+    d="M20 8h4a32 32 0 0 1 32 32v4a12 12 0 0 1-12 12h-4A32 32 0 0 1 8 24v-4A12 12 0 0 1 20 8Z"
+    transform="rotate(-7 32 32)"
+  />
+</svg>

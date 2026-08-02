@@ -1,5 +1,5 @@
 {
-  "name": "acao-clara",
+  "name": "quanto-custa",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,21 +7,36 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "db:setup": "npm run db:migrate && npm run db:seed && npm run sync:companies",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "db:seed": "tsx scripts/db-seed.ts",
+    "sync:companies": "tsx scripts/sync-companies.ts",
+    "update:fundamentals": "tsx scripts/update-fundamentals.ts"
   },
   "dependencies": {
+    "@next/env": "^16.2.12",
+    "csv-parse": "^7.0.1",
+    "iconv-lite": "^0.7.3",
     "next": "16.2.12",
+    "postgres": "^3.4.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "unzipper": "^0.12.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/unzipper": "^0.10.11",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5",
     "vitest": "^4.1.10"
   }

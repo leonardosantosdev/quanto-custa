@@ -13,6 +13,10 @@ export const DEMO_STOCKS: readonly StockSnapshot[] = [
     bookValuePerShare: 32.5,
     updatedAt: DEMO_UPDATED_AT,
     referenceDate: DEMO_REFERENCE_DATE,
+    fundamentalsUpdatedAt: DEMO_UPDATED_AT,
+    documentReceivedAt: null,
+    documentType: null,
+    documentVersion: null,
     source: "demo",
   },
   {
@@ -24,6 +28,10 @@ export const DEMO_STOCKS: readonly StockSnapshot[] = [
     bookValuePerShare: 31.72,
     updatedAt: DEMO_UPDATED_AT,
     referenceDate: DEMO_REFERENCE_DATE,
+    fundamentalsUpdatedAt: DEMO_UPDATED_AT,
+    documentReceivedAt: null,
+    documentType: null,
+    documentVersion: null,
     source: "demo",
   },
   {
@@ -35,6 +43,10 @@ export const DEMO_STOCKS: readonly StockSnapshot[] = [
     bookValuePerShare: 8.37,
     updatedAt: DEMO_UPDATED_AT,
     referenceDate: DEMO_REFERENCE_DATE,
+    fundamentalsUpdatedAt: DEMO_UPDATED_AT,
+    documentReceivedAt: null,
+    documentType: null,
+    documentVersion: null,
     source: "demo",
   },
   {
@@ -46,6 +58,10 @@ export const DEMO_STOCKS: readonly StockSnapshot[] = [
     bookValuePerShare: 3.92,
     updatedAt: DEMO_UPDATED_AT,
     referenceDate: DEMO_REFERENCE_DATE,
+    fundamentalsUpdatedAt: DEMO_UPDATED_AT,
+    documentReceivedAt: null,
+    documentType: null,
+    documentVersion: null,
     source: "demo",
   },
 ] as const;
@@ -63,12 +79,12 @@ export function findDemoStock(ticker: string): StockSnapshot | undefined {
 
 export function searchDemoStocks(query: string): StockSnapshot[] {
   const normalizedQuery = foldText(query.trim());
-
-  if (!normalizedQuery) {
-    return [];
-  }
-
+  if (!normalizedQuery) return [];
   return DEMO_STOCKS.filter((stock) =>
     foldText(`${stock.ticker} ${stock.name}`).includes(normalizedQuery),
   );
+}
+
+export function isDemoDataEnabled(): boolean {
+  return process.env.ENABLE_DEMO_DATA === "true";
 }

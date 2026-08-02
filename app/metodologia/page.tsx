@@ -66,6 +66,12 @@ export default function MethodologyPage() {
                 A qualidade do resultado depende da qualidade e do período de
                 referência desses dois dados.
               </p>
+              <p>
+                Nos dados automáticos, ambos são calculados no nível da companhia:
+                lucro ou patrimônio atribuível aos controladores dividido pelo
+                total de ações emitidas. Assim, classes diferentes da mesma empresa
+                recebem os mesmos indicadores por ação.
+              </p>
             </section>
 
             <section id="comparacao">
@@ -93,6 +99,12 @@ export default function MethodologyPage() {
                 resultado sem sentido financeiro.
               </p>
               <p>
+                A calculadora manual é uma ferramenta separada da pesquisa de
+                ações. Nela, você informa somente LPA e VPA; não há ticker,
+                cotação ou comparação com o mercado. Os valores não são
+                verificados nem armazenados.
+              </p>
+              <p>
                 O MVP aceita apenas ações de empresas brasileiras. FIIs, ETFs,
                 BDRs, units, índices e outros instrumentos não são suportados.
               </p>
@@ -101,14 +113,22 @@ export default function MethodologyPage() {
             <section id="dados">
               <h2>Origem e atualização dos dados</h2>
               <p>
-                Com um token configurado, os tickers, cotações e indicadores vêm
-                da brapi.dev. A cotação usa o horário informado pela API; LPA e
-                VPA usam a referência contábil disponível em suas estatísticas.
+                As cotações atuais vêm da brapi.dev. LPA e VPA são calculados a
+                partir dos arquivos oficiais ITR e DFP publicados pela CVM e
+                armazenados separadamente no banco. Por isso a página mostra o
+                horário da cotação, a data de referência contábil e a atualização
+                do fundamento como datas distintas.
               </p>
               <p>
-                Sem token, a ferramenta usa quatro exemplos locais claramente
-                identificados como dados de demonstração. Esses valores servem
-                apenas para conhecer o funcionamento da interface.
+                A busca também usa o catálogo da brapi.dev para oferecer ações
+                que ainda não passaram pela ingestão oficial. Quando não há
+                fundamentos seguros, a aplicação informa essa limitação sem
+                misturar a ação pesquisada com a calculadora manual.
+              </p>
+              <p>
+                Exemplos locais só são usados quando o modo de demonstração é
+                habilitado explicitamente. Esses valores são sempre identificados
+                e servem apenas para conhecer o funcionamento da interface.
               </p>
             </section>
 

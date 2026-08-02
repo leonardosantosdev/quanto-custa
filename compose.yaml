@@ -1,0 +1,23 @@
+name: quanto-custa
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: quanto-custa-postgres
+    environment:
+      POSTGRES_USER: quanto_custa
+      POSTGRES_PASSWORD: quanto_custa_dev
+      POSTGRES_DB: quanto_custa
+    ports:
+      - "127.0.0.1:5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quanto_custa -d quanto_custa"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres_data:
+    name: quanto-custa_postgres_data

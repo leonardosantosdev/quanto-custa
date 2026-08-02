@@ -1,7 +1,6 @@
 export const SITE_CONFIG = {
-  name: "Ação Clara",
-  description:
-    "Número de Graham para ações brasileiras, explicado com clareza.",
+  name: "Quanto Custa",
+  description: "Precifique o mercado financeiro.",
 } as const;
 
 export const CACHE_TIMES = {

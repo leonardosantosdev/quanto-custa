@@ -209,8 +209,16 @@ export function StockSearch({ autoFocus = false }: StockSearchProps) {
                   <span className="option-ticker">{result.ticker}</span>
                   <span className="option-name">{result.name}</span>
                 </span>
-                <span className="option-class">
-                  {result.supported ? result.assetClass : `${result.assetClass} · indisponível`}
+                <span
+                  className="option-class"
+                  data-mode={result.calculationMode}
+                  title={result.assetClass}
+                >
+                  {result.supported
+                    ? result.calculationMode === "automatic"
+                      ? "Cálculo automático"
+                      : "Sem dados automáticos"
+                    : `${result.assetClass} · indisponível`}
                 </span>
               </button>
             </li>

@@ -13,8 +13,8 @@ export function Header() {
         <nav className="main-nav" aria-label="Navegação principal">
           <Link href="/">Início</Link>
           <Link href="/metodologia">Metodologia</Link>
-          <Link className="nav-action" href="/#pesquisar">
-            Consultar ação
+          <Link className="nav-action" href="/#calcular">
+            Calcular
           </Link>
         </nav>
       </div>

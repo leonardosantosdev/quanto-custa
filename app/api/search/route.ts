@@ -1,4 +1,4 @@
-import { searchStocks } from "@/lib/brapi";
+import { searchStocks } from "@/lib/stocks";
 
 export async function GET(request: Request) {
   const query = new URL(request.url).searchParams.get("q") ?? "";

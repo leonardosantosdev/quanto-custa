@@ -1,4 +1,4 @@
-import { getStock } from "@/lib/brapi";
+import { getStock } from "@/lib/stocks";
 
 export async function GET(
   _request: Request,
@@ -7,7 +7,7 @@ export async function GET(
   const { ticker } = await params;
   const result = await getStock(ticker);
   const status =
-    result.status === "success"
+    result.status === "success" || result.status === "manual"
       ? 200
       : result.status === "not-found"
         ? 404
