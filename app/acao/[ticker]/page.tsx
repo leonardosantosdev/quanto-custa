@@ -47,7 +47,7 @@ function ErrorState({
           <span className="error-code">{ticker || "AÇÃO"}</span>
           <h1>{title}</h1>
           <p>{message}</p>
-          <Link className="primary-link" href="/">
+          <Link className="primary-link" href="/graham">
             Pesquisar outra ação
           </Link>
         </div>

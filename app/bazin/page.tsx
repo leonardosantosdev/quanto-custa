@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { StockSearch } from "@/components/stock-search";
-import { ValuationMethodSwitch } from "@/components/valuation-method-switch";
 import { SITE_CONFIG } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default function BazinHome() {
       <section className="hero-section bazin-hero">
         <div className="page-shell hero-grid">
           <div className="hero-copy">
-            <ValuationMethodSwitch active="bazin" />
             <p className="eyebrow">Calculadora de Bazin</p>
             <h1>Consulte o preço-teto de Bazin de uma ação</h1>
             <p className="hero-subtitle">
@@ -97,7 +95,7 @@ export default function BazinHome() {
             </article>
           </div>
           <div className="method-link-wrap">
-            <Link className="text-link" href="/metodologia#bazin">
+            <Link className="text-link" href="/metodologia/bazin">
               Conheça a metodologia completa <span aria-hidden="true">→</span>
             </Link>
           </div>

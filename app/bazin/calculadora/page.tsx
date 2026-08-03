@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ManualBazinCalculator } from "@/components/manual-bazin-calculator";
-import { ValuationMethodSwitch } from "@/components/valuation-method-switch";
 
 export const metadata: Metadata = {
   title: "Calculadora manual de Bazin",
@@ -23,7 +22,6 @@ export default function ManualBazinPage() {
         </nav>
 
         <header className="manual-page-header">
-          <ValuationMethodSwitch active="bazin" />
           <p className="eyebrow">Calculadora manual</p>
           <h1>Calcule diretamente com seus proventos</h1>
           <p>
@@ -38,6 +36,12 @@ export default function ManualBazinPage() {
         </div>
 
         <ManualBazinCalculator />
+
+        <div className="method-link-wrap">
+          <Link className="text-link" href="/metodologia/bazin">
+            Entenda a metodologia de Bazin <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </div>
     </main>
   );

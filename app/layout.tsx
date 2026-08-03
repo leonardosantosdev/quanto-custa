@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description:
-    "Precifique ações brasileiras com o Número de Graham e o preço-teto de Bazin.",
+    "Precifique ações brasileiras e simule juros compostos com ferramentas financeiras transparentes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
