@@ -9,6 +9,7 @@
   --green: #176b4d;
   --green-dark: #0f4f38;
   --green-light: #dff2e8;
+  --green-line: #b7dcca;
   --sand: #f4f0e7;
   --white: #ffffff;
   --danger-soft: #fff0ed;
@@ -564,6 +565,20 @@ a {
   margin-top: 26px;
 }
 
+.tool-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  border-top: 0;
+}
+
+.tool-cards .intro-card,
+.tool-cards .intro-card + .intro-card {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+
 .intro-card p {
   margin: 0;
   color: var(--muted);
@@ -786,24 +801,254 @@ a {
   gap: 8px;
 }
 
-.compound-split-input select {
+.compound-split-input .styled-select {
   min-width: 104px;
-  padding: 0 34px 0 12px;
+}
+
+.manual-input-wrap .compound-number-input {
+  padding-left: 13px;
+}
+
+.fixed-income-form {
+  display: grid;
+  gap: 24px;
+}
+
+.fixed-income-common-fields,
+.fixed-income-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fixed-income-products-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fixed-income-form label > span,
+.fixed-income-form label > small {
+  display: block;
+}
+
+.fixed-income-form label > span {
+  margin-bottom: 4px;
+  font-weight: 680;
+}
+
+.fixed-income-form label > small {
+  min-height: 2.5em;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.fixed-income-product {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 18px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--soft);
+}
+
+.fixed-income-product > label:last-child {
+  grid-column: 1 / -1;
+}
+
+.fixed-income-product legend {
+  padding: 0 8px;
+  color: var(--green-dark);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fixed-income-submit {
+  justify-self: end;
+  border: 0;
+  cursor: pointer;
+}
+
+.comparison-highlight {
+  margin-top: 36px;
+  padding: 28px 30px;
+  border: 1px solid var(--green-line);
+  border-radius: 16px;
+  background: var(--green-light);
+}
+
+.comparison-highlight h2 {
+  margin: 7px 0;
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  letter-spacing: -0.045em;
+}
+
+.comparison-highlight p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.fixed-income-results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.fixed-income-result-card {
+  position: relative;
+}
+
+.fixed-income-result-card.is-winner {
+  border-color: var(--green-line);
+  box-shadow: 0 14px 38px rgba(15, 71, 51, 0.08);
+}
+
+.fixed-income-result-card h2 {
+  margin: 8px 0 18px;
+}
+
+.fixed-income-final-value {
+  display: block;
+  color: var(--green-dark);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.055em;
+}
+
+.fixed-income-detail-list {
+  margin: 26px 0 0;
+}
+
+.fixed-income-detail-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.fixed-income-detail-list dt {
+  color: var(--muted);
+}
+
+.fixed-income-detail-list dd {
+  margin: 0;
+  font-weight: 680;
+  text-align: right;
+}
+
+.fixed-income-equivalence {
+  margin: 22px 0 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.styled-select {
+  position: relative;
+  min-width: 0;
+}
+
+.styled-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   outline: 0;
   background: var(--white);
   color: var(--ink);
   font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-.compound-split-input select:focus {
+.styled-select-trigger:hover {
+  border-color: #aebdb5;
+  background: #fdfefd;
+}
+
+.styled-select-trigger:focus-visible,
+.styled-select.is-open .styled-select-trigger {
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgba(31, 122, 87, 0.1);
 }
 
-.manual-input-wrap .compound-number-input {
-  padding-left: 13px;
+.styled-select-chevron {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin: -4px 3px 0 0;
+  border-right: 1.5px solid var(--green-dark);
+  border-bottom: 1.5px solid var(--green-dark);
+  transform: rotate(45deg);
+  transition: transform 160ms ease, margin 160ms ease;
+}
+
+.styled-select.is-open .styled-select-chevron {
+  margin-top: 4px;
+  transform: rotate(225deg);
+}
+
+.styled-select-menu {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 7px);
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--white);
+  box-shadow: 0 18px 46px rgba(15, 79, 56, 0.16);
+  list-style: none;
+}
+
+.styled-select-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.styled-select-menu button:hover,
+.styled-select-menu button.is-active {
+  background: var(--soft);
+  color: var(--green-dark);
+}
+
+.styled-select-menu [aria-selected="true"] button {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 680;
+}
+
+.styled-select.is-compact .styled-select-trigger {
+  white-space: nowrap;
 }
 
 .manual-form label > span,
@@ -1252,6 +1497,11 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .fixed-income-products-grid,
+  .fixed-income-results-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero-section {
     padding-top: 62px;
   }
@@ -1312,7 +1562,7 @@ a {
     font-size: 0.8rem;
   }
 
-  .main-nav > a:nth-child(4) {
+  .main-nav > a:nth-child(5) {
     display: none;
   }
 
@@ -1383,6 +1633,10 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .tool-cards {
+    grid-template-columns: 1fr;
+  }
+
   .intro-card,
   .intro-card + .intro-card {
     padding: 26px 0;
@@ -1448,6 +1702,18 @@ a {
 
   .manual-form {
     grid-template-columns: 1fr;
+  }
+
+  .fixed-income-common-fields,
+  .fixed-income-products-grid,
+  .fixed-income-product,
+  .fixed-income-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fixed-income-submit {
+    justify-self: stretch;
+    justify-content: center;
   }
 
   .compound-interest-form .manual-submit {

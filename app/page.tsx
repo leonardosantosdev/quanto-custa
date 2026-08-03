@@ -36,6 +36,15 @@ const tools = [
     href: "/juros-compostos",
     action: "Fazer simulação",
   },
+  {
+    number: "04",
+    eyebrow: "Resultado líquido",
+    title: "Comparador de renda fixa",
+    description:
+      "Compare CDB, LCI e LCA considerando percentual do CDI, prazo e Imposto de Renda.",
+    href: "/renda-fixa",
+    action: "Comparar produtos",
+  },
 ];
 
 export default function HomePage() {
@@ -70,6 +79,7 @@ export default function HomePage() {
               <div><strong>Preço</strong><span>O que lucro e patrimônio sugerem?</span></div>
               <div><strong>Renda</strong><span>Qual preço atende ao retorno desejado?</span></div>
               <div><strong>Tempo</strong><span>Como juros e aportes formam patrimônio?</span></div>
+              <div><strong>Líquido</strong><span>Qual produto deixa mais dinheiro no resgate?</span></div>
             </div>
           </aside>
         </div>

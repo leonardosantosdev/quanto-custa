@@ -14,6 +14,7 @@ export function Header() {
           <Link href="/graham">Graham</Link>
           <Link href="/bazin">Bazin</Link>
           <Link href="/juros-compostos">Juros</Link>
+          <Link href="/renda-fixa">Renda fixa</Link>
           <Link href="/metodologia">Metodologia</Link>
         </nav>
       </div>

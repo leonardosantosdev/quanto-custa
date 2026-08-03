@@ -2,7 +2,7 @@
 
 **Precifique o mercado financeiro.**
 
-Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM e proventos oficiais da B3 para calcular e explicar o Número de Graham e o preço-teto de Bazin. Também inclui uma calculadora independente de juros compostos.
+Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM e proventos oficiais da B3 para calcular e explicar o Número de Graham e o preço-teto de Bazin. Também inclui calculadora de juros compostos e comparador líquido de renda fixa.
 
 ## Arquitetura
 
@@ -33,6 +33,7 @@ O projeto usa SQL direto com o cliente leve `postgres`, adequado a conexões ser
 - Fundamentos: conjuntos públicos oficiais [ITR](https://dados.cvm.gov.br/dataset/cia_aberta-doc-itr) e [DFP](https://dados.cvm.gov.br/dataset/cia_aberta-doc-dfp) da CVM.
 - Cotação: brapi.dev, consultada exclusivamente no servidor.
 - Dividendos e JCP: histórico de eventos corporativos da B3, associado à classe da ação pelo ISIN.
+- CDI anual: série 4389 do Banco Central, atualizada a cada hora e sempre editável como premissa da projeção.
 - Cadastro ticker/CNPJ/código CVM: [FCA](https://dados.cvm.gov.br/dataset/cia_aberta-doc-fca) e [cadastro diário de companhias abertas](https://dados.cvm.gov.br/dataset/cia_aberta-cad) da CVM, cruzados com os instrumentos e o [cadastro de companhias listadas](https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/) da B3.
 - Catálogo complementar de busca: brapi.dev, usado somente como fallback para ativos ainda não sincronizados.
 - Demonstração: `data/demo/stocks.ts`, apenas quando explicitamente habilitada.
@@ -49,6 +50,8 @@ A entrada do cálculo oferece duas opções independentes:
 Valores manuais nunca são enviados para a API, gravados no Postgres ou misturados ao histórico oficial. Uma ação sem fundamentos seguros pode direcionar o usuário à calculadora manual, mas os dois fluxos permanecem separados.
 
 O método Bazin possui os mesmos dois fluxos independentes. No automático, a aplicação soma os dividendos integrais e o JCP líquido de 15% de IR cuja data-com está nos últimos 12 meses, ajustando eventos anteriores por desdobramentos, bonificações e grupamentos posteriores. O retorno mínimo padrão é 6%, mas pode ser alterado na calculadora manual. A cotação manual é opcional e serve apenas para comparação.
+
+O comparador de renda fixa projeta uma aplicação única em dois produtos, com rentabilidade em percentual do CDI ou prefixada. Produtos tributáveis usam a tabela regressiva de IR sobre os rendimentos; LCI/LCA são tratadas como isentas para pessoa física. O prazo mínimo é 30 dias, pois o MVP não calcula IOF. CDI futuro, inflação, risco, liquidez e taxas externas não são previstos.
 
 ## Requisitos e configuração
 

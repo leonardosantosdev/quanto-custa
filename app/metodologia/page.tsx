@@ -29,6 +29,13 @@ const methods = [
       "Conheça a capitalização mensal, a conversão de taxas e a convenção usada para os aportes.",
     href: "/metodologia/juros-compostos",
   },
+  {
+    number: "04",
+    title: "Comparador de renda fixa",
+    description:
+      "Entenda como CDI, prazo e tributação são transformados em um resultado líquido comparável.",
+    href: "/metodologia/renda-fixa",
+  },
 ];
 
 export default function MethodologyPage() {

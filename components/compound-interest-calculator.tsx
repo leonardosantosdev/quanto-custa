@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 
 import { Disclaimer } from "@/components/disclaimer";
 import { MetricCard } from "@/components/metric-card";
+import { StyledSelect } from "@/components/styled-select";
 import {
   calculateCompoundInterest,
   type CompoundInterestInput,
@@ -138,17 +139,19 @@ export function CompoundInterestCalculator() {
                 />
                 <span>%</span>
               </div>
-              <select
+              <StyledSelect
                 value={ratePeriod}
-                onChange={(event) => {
-                  setRatePeriod(event.target.value as InterestRatePeriod);
+                onChange={(value) => {
+                  setRatePeriod(value);
                   clearResult();
                 }}
-                aria-label="Período da taxa de juros"
-              >
-                <option value="annual">ao ano</option>
-                <option value="monthly">ao mês</option>
-              </select>
+                ariaLabel="Período da taxa de juros"
+                compact
+                options={[
+                  { value: "annual", label: "ao ano" },
+                  { value: "monthly", label: "ao mês" },
+                ]}
+              />
             </div>
           </label>
           <label>
@@ -168,17 +171,19 @@ export function CompoundInterestCalculator() {
                   required
                 />
               </div>
-              <select
+              <StyledSelect
                 value={termUnit}
-                onChange={(event) => {
-                  setTermUnit(event.target.value as InvestmentTermUnit);
+                onChange={(value) => {
+                  setTermUnit(value);
                   clearResult();
                 }}
-                aria-label="Unidade do prazo"
-              >
-                <option value="years">anos</option>
-                <option value="months">meses</option>
-              </select>
+                ariaLabel="Unidade do prazo"
+                compact
+                options={[
+                  { value: "years", label: "anos" },
+                  { value: "months", label: "meses" },
+                ]}
+              />
             </div>
           </label>
           <button className="primary-link manual-submit" type="submit">
