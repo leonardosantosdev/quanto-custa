@@ -111,6 +111,10 @@ a {
   color: var(--green-dark);
 }
 
+.main-nav .mobile-tools-link {
+  display: none;
+}
+
 .nav-action {
   padding: 9px 14px;
   border: 1px solid var(--line);
@@ -579,6 +583,10 @@ a {
   background: var(--white);
 }
 
+.tool-cards .intro-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .intro-card p {
   margin: 0;
   color: var(--muted);
@@ -894,6 +902,10 @@ a {
   color: var(--muted);
 }
 
+.comparison-highlight .result-label {
+  color: var(--green-dark);
+}
+
 .fixed-income-results-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -951,6 +963,80 @@ a {
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.55;
+}
+
+.independence-form {
+  display: grid;
+  gap: 22px;
+}
+
+.independence-fieldset {
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--soft);
+}
+
+.independence-fieldset legend {
+  padding: 0 8px;
+  color: var(--green-dark);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.independence-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.independence-rates-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.independence-wide-field {
+  grid-column: 1 / -1;
+}
+
+.independence-form label > span,
+.independence-form label > small {
+  display: block;
+}
+
+.independence-form label > span {
+  margin-bottom: 4px;
+  font-weight: 680;
+}
+
+.independence-form label > small {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.independence-submit {
+  justify-self: end;
+  border: 0;
+  cursor: pointer;
+}
+
+.independence-progress {
+  height: 8px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(15, 79, 56, 0.12);
+}
+
+.independence-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--green);
 }
 
 .styled-select {
@@ -1502,6 +1588,15 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .main-nav > a {
+    display: none;
+  }
+
+  .main-nav > a:nth-child(6),
+  .main-nav .mobile-tools-link {
+    display: inline-flex;
+  }
+
   .hero-section {
     padding-top: 62px;
   }
@@ -1560,10 +1655,6 @@ a {
   .main-nav {
     gap: 14px;
     font-size: 0.8rem;
-  }
-
-  .main-nav > a:nth-child(5) {
-    display: none;
   }
 
   .nav-action {
@@ -1637,6 +1728,10 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .tool-cards .intro-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
   .intro-card,
   .intro-card + .intro-card {
     padding: 26px 0;
@@ -1707,11 +1802,22 @@ a {
   .fixed-income-common-fields,
   .fixed-income-products-grid,
   .fixed-income-product,
-  .fixed-income-results-grid {
+  .fixed-income-results-grid,
+  .independence-fields-grid,
+  .independence-rates-grid {
     grid-template-columns: 1fr;
   }
 
+  .independence-wide-field {
+    grid-column: auto;
+  }
+
   .fixed-income-submit {
+    justify-self: stretch;
+    justify-content: center;
+  }
+
+  .independence-submit {
     justify-self: stretch;
     justify-content: center;
   }

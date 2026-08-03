@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   calculateBazinPriceCeiling,
   DEFAULT_BAZIN_YIELD_PERCENT,
-  JCP_NET_FACTOR,
+  jcpNetFactor,
 } from "@/lib/bazin";
 
 describe("cálculo de Bazin", () => {
@@ -37,7 +37,8 @@ describe("cálculo de Bazin", () => {
     ).toBe("invalid");
   });
 
-  it("mantém explícito o fator líquido do JCP", () => {
-    expect(2 * JCP_NET_FACTOR).toBeCloseTo(1.7);
+  it("aplica a retenção de JCP correspondente ao ano de referência", () => {
+    expect(2 * jcpNetFactor("2025-12-31")).toBeCloseTo(1.7);
+    expect(2 * jcpNetFactor("2026-01-01")).toBeCloseTo(1.65);
   });
 });

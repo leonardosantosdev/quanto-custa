@@ -36,6 +36,13 @@ const methods = [
       "Entenda como CDI, prazo e tributação são transformados em um resultado líquido comparável.",
     href: "/metodologia/renda-fixa",
   },
+  {
+    number: "05",
+    title: "Independência financeira",
+    description:
+      "Veja como renda desejada, retorno real, aportes e taxa de retirada formam a projeção.",
+    href: "/metodologia/independencia-financeira",
+  },
 ];
 
 export default function MethodologyPage() {

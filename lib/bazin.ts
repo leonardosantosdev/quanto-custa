@@ -1,5 +1,14 @@
 export const DEFAULT_BAZIN_YIELD_PERCENT = 6;
-export const JCP_NET_FACTOR = 0.85;
+export const JCP_IR_RATE_UNTIL_2025 = 0.15;
+export const JCP_IR_RATE_FROM_2026 = 0.175;
+
+export function jcpNetFactor(referenceDate: string): number {
+  const incomeTaxRate =
+    referenceDate >= "2026-01-01"
+      ? JCP_IR_RATE_FROM_2026
+      : JCP_IR_RATE_UNTIL_2025;
+  return 1 - incomeTaxRate;
+}
 
 export type BazinInvalidReason =
   | "missing-proceeds"

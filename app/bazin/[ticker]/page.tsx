@@ -188,7 +188,7 @@ export default async function BazinStockPage({
               <li>A referência de 6% pode não refletir seu custo de oportunidade.</li>
               <li>O resultado não é uma recomendação de investimento.</li>
             </ul>
-            <Disclaimer />
+            <Disclaimer variant="bazin" />
           </aside>
         </div>
 

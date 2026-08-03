@@ -50,9 +50,10 @@ export default function BazinMethodologyPage() {
             <section id="proventos">
               <h2>Quais proventos entram</h2>
               <p>
-                Somamos dividendos integrais e JCP líquido de 15% de imposto cuja
-                data-com ocorreu nos últimos 12 meses. Rendimentos de outros tipos
-                não são incluídos silenciosamente.
+                Somamos dividendos e JCP líquidos cuja data-com ocorreu nos últimos
+                12 meses. Para o JCP automático, a data de aprovação informada pela
+                B3 define a retenção usada: 15% até 2025 e 17,5% a partir de 2026.
+                Rendimentos de outros tipos não são incluídos silenciosamente.
               </p>
               <p>
                 Eventos são associados à classe correta da ação pelo ISIN. Assim,
@@ -87,7 +88,7 @@ export default function BazinMethodologyPage() {
                 <li>A fórmula não avalia dívida nem sustentabilidade da distribuição.</li>
                 <li>A taxa de 6% pode não refletir seu custo de oportunidade.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="bazin" />
             </section>
           </article>
         </div>

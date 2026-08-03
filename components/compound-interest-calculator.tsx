@@ -264,7 +264,7 @@ export function CompoundInterestCalculator() {
                 <li>Rentabilidade passada não garante retorno futuro.</li>
                 <li>O resultado é uma simulação, não uma recomendação.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="compound-interest" />
             </aside>
           </div>
         </>

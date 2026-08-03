@@ -45,6 +45,15 @@ const tools = [
     href: "/renda-fixa",
     action: "Comparar produtos",
   },
+  {
+    number: "05",
+    eyebrow: "Planejamento de longo prazo",
+    title: "Independência financeira",
+    description:
+      "Transforme sua renda mensal desejada em uma meta de patrimônio, idade e aporte necessário.",
+    href: "/independencia-financeira",
+    action: "Planejar independência",
+  },
 ];
 
 export default function HomePage() {
@@ -80,6 +89,7 @@ export default function HomePage() {
               <div><strong>Renda</strong><span>Qual preço atende ao retorno desejado?</span></div>
               <div><strong>Tempo</strong><span>Como juros e aportes formam patrimônio?</span></div>
               <div><strong>Líquido</strong><span>Qual produto deixa mais dinheiro no resgate?</span></div>
+              <div><strong>Meta</strong><span>Quando o patrimônio pode sustentar sua renda?</span></div>
             </div>
           </aside>
         </div>

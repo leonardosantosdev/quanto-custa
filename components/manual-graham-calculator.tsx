@@ -192,7 +192,7 @@ export function ManualGrahamCalculator() {
                 <li>A fórmula não deve ser usada isoladamente.</li>
                 <li>O resultado não é uma recomendação de investimento.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="graham" />
             </aside>
           </div>
         </>

@@ -2,7 +2,7 @@
 
 **Precifique o mercado financeiro.**
 
-Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM e proventos oficiais da B3 para calcular e explicar o Número de Graham e o preço-teto de Bazin. Também inclui calculadora de juros compostos e comparador líquido de renda fixa.
+Aplicação educacional em Next.js que combina cotação atual com fundamentos oficiais da CVM e proventos oficiais da B3 para calcular e explicar o Número de Graham e o preço-teto de Bazin. Também inclui calculadora de juros compostos, comparador líquido de renda fixa e planejamento de independência financeira.
 
 ## Arquitetura
 

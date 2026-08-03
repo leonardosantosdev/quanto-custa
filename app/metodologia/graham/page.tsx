@@ -88,7 +88,7 @@ export default function GrahamMethodologyPage() {
                 <li>Setores diferentes exigem contexto próprio.</li>
                 <li>Eventos extraordinários podem distorcer LPA e VPA.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="graham" />
             </section>
           </article>
         </div>

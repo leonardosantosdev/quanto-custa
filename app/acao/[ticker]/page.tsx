@@ -205,7 +205,7 @@ export default async function StockPage({ params }: PageProps<"/acao/[ticker]">)
               <li>A métrica pode ser inadequada para certos setores e estruturas.</li>
               <li>O resultado não é uma recomendação de investimento.</li>
             </ul>
-            <Disclaimer />
+            <Disclaimer variant="graham" />
           </aside>
         </div>
 

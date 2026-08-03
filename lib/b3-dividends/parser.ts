@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-import { JCP_NET_FACTOR } from "@/lib/bazin";
+import { jcpNetFactor } from "@/lib/bazin";
 import type {
   B3CashDividendRecord,
   B3CompanySupplement,
@@ -171,7 +171,7 @@ export function parseB3DividendSnapshot(options: {
         sourceLabel: label,
         grossValuePerShare: adjustedGross,
         netValuePerShare:
-          type === "jcp" ? adjustedGross * JCP_NET_FACTOR : adjustedGross,
+          type === "jcp" ? adjustedGross * jcpNetFactor(approvalDate) : adjustedGross,
         originalValuePerShare: originalValue,
         adjustmentFactor: factor,
         approvalDate,

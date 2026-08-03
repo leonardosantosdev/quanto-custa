@@ -15,7 +15,9 @@ export function Header() {
           <Link href="/bazin">Bazin</Link>
           <Link href="/juros-compostos">Juros</Link>
           <Link href="/renda-fixa">Renda fixa</Link>
+          <Link href="/independencia-financeira">Independência</Link>
           <Link href="/metodologia">Metodologia</Link>
+          <Link className="mobile-tools-link" href="/#ferramentas">Ferramentas</Link>
         </nav>
       </div>
     </header>

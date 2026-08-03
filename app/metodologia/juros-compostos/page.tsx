@@ -77,7 +77,7 @@ export default function CompoundInterestMethodologyPage() {
                 <li>A frequência dos aportes é mensal e regular.</li>
                 <li>O resultado é uma projeção matemática, não uma promessa de retorno.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="compound-interest" />
             </section>
           </article>
         </div>

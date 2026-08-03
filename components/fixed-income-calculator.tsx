@@ -325,7 +325,7 @@ export function FixedIncomeCalculator({
                 <li>A simulação não desconta inflação nem custos externos.</li>
                 <li>O resultado não é recomendação de investimento.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="fixed-income" />
             </aside>
           </div>
         </>

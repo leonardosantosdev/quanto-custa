@@ -181,7 +181,7 @@ export function ManualBazinCalculator() {
                 <li>Consistência, dívida e qualidade do negócio exigem análise adicional.</li>
                 <li>O resultado não é uma recomendação de investimento.</li>
               </ul>
-              <Disclaimer />
+              <Disclaimer variant="bazin" />
             </aside>
           </div>
         </>

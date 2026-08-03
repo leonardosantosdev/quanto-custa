@@ -63,7 +63,7 @@ describe("proventos oficiais da B3", () => {
     expect(parsed.candidates.filter((event) => event.ticker === "PETR4")).toHaveLength(1);
     expect(new Set(parsed.candidates.map((event) => event.eventKey)).size).toBe(3);
     const jcp = parsed.candidates.find((event) => event.proceedsType === "jcp");
-    expect(jcp?.netValuePerShare).toBeCloseTo(0.35048636 * 0.85);
+    expect(jcp?.netValuePerShare).toBeCloseTo(0.35048636 * 0.825);
   });
 
   it("ajusta proventos anteriores a bonificação ou desdobramento", () => {

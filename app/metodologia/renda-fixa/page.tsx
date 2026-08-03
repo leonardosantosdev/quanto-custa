@@ -91,7 +91,7 @@ export default function FixedIncomeMethodologyPage() {
                 Fontes: <a href={BCB_CDI_SOURCE_URL} target="_blank" rel="noreferrer">Banco Central do Brasil</a>
                 {" "}e <a href="https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026" target="_blank" rel="noreferrer">Receita Federal</a>.
               </p>
-              <Disclaimer />
+              <Disclaimer variant="fixed-income" />
             </section>
           </article>
         </div>
